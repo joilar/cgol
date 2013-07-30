@@ -1,6 +1,18 @@
+# File: Makefile
+# Author: John Oilar
+# Date: 07/29/2013
+# Description: Builds an implementation of Conway's Game of Life.
 
-all:
-	g++ -o cgol main.cpp
+PROGRAM = cgol
+COMPILER = g++
+FLAGS = 
+OBJS = main.o
 
+all: $(OBJS)
+	$(COMPILER) -o $(PROGRAM) $(OBJS)
+
+main.o:
+
+.PHONY: clean
 clean:
-	rm cgol
+	rm -f $(PROGRAM) *.o
