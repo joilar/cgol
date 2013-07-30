@@ -5,8 +5,8 @@
 namespace cgol {
 
 class CGOL {
-	public:
-		int Run (int argc, char** argv);
+public:
+	int		Run ( int argc, char** argv ) const;
 };
 
 }
