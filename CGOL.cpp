@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "cgol.h"
+#include "CGOL.h"
 
 using namespace cgol;
 

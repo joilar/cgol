@@ -1,5 +1,5 @@
 
-#include "cgol.h"
+#include "CGOL.h"
 
 int main ( int argc, char** argv ) {
 	int exit_code;

@@ -6,13 +6,13 @@
 PROGRAM = cgol
 COMPILER = g++
 FLAGS = 
-OBJS = cgol.o main.o
+OBJS = CGOL.o main.o
 
 all: $(OBJS)
 	$(COMPILER) -o $(PROGRAM) $(OBJS)
 
 main.o:
-cgol.o: cgol.h
+CGOL.o: CGOL.h
 
 .PHONY: clean
 clean:
