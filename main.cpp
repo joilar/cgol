@@ -10,5 +10,7 @@ int main (int argc, char** argv) {
 	cgol = new cgol::CGOL();
 	exit_code = cgol->Run(argc, argv);
 
+	delete cgol;
+
 	return exit_code;
 }
