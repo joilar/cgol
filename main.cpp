@@ -1,9 +1,14 @@
 
-#include <iostream>
-
-using namespace std;
+#include "cgol.h"
 
 int main (int argc, char** argv) {
-	cout << "Hello world!" << endl;
-	return 0;
+
+	int exit_code;
+	cgol::CGOL* cgol;
+
+	// TODO: Exception handling on CGOL instantiation.
+	cgol = new cgol::CGOL();
+	exit_code = cgol->Run(argc, argv);
+
+	return exit_code;
 }
