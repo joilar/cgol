@@ -584,7 +584,7 @@ PACKAGE_STRING='cgol 0'
 PACKAGE_BUGREPORT='johnoilar@gmail.com'
 PACKAGE_URL=''
 
-ac_unique_file="main.cpp"
+ac_unique_file="src/main.cpp"
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
 ac_ct_CC

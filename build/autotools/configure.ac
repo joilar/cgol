@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_INIT([cgol], [0], [johnoilar@gmail.com])
-AC_CONFIG_SRCDIR([main.cpp])
+AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([inc/config.h:config.h.in])
 
 # Checks for programs.
