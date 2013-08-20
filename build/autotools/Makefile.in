@@ -1,0 +1,23 @@
+
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+$(srcdir)/configure: configure.ac aclocal.m4
+	cd '$(srcdir)' && autoconf
+
+# autoheader might not change config.h.in, so touch a stamp file.
+$(srcdir)/config.h.in: config.timestamp.in
+$(srcdir)/config.timestamp.in: configure.ac aclocal.m4
+	cd '$(srcdir)' && autoheader
+	echo timestamp > '$(srcdir)/config.timestamp.in'
+
+config.h: config.timestamp
+config.timestamp: config.h.in config.status
+	./config.status
+
+Makefile: Makefile.in config.status
+	./config.status
+
+config.status: configure
+	./config.status --recheck
+
