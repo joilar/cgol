@@ -4,16 +4,16 @@
 #include "CGOL.h"
 
 int main ( int argc, char** argv ) {
-	int exit_code;
-	cgol::CGOL* cgol;
+    int exit_code;
+    cgol::CGOL* cgol;
 
-	// TODO: Exception handling on CGOL instantiation.
-	cgol = new cgol::CGOL();
-	exit_code = cgol->Run( argc, argv );
+    // TODO: Exception handling on CGOL instantiation.
+    cgol = new cgol::CGOL();
+    exit_code = cgol->Run( argc, argv );
 
-	delete cgol;
+    delete cgol;
 
-        puts("\nThank you for running package " PACKAGE ".");
+    puts("\nThank you for running package " PACKAGE ".");
 
-	return exit_code;
+    return exit_code;
 }
