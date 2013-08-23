@@ -66,9 +66,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_cgol_OBJECTS = main.$(OBJEXT) CGOL.$(OBJEXT)
+am_cgol_OBJECTS = cgol-main.$(OBJEXT) cgol-IWidgetFactory.$(OBJEXT) \
+	cgol-IWindow.$(OBJEXT) cgol-Program.$(OBJEXT)
 cgol_OBJECTS = $(am_cgol_OBJECTS)
 cgol_LDADD = $(LDADD)
+cgol_LINK = $(CXXLD) $(cgol_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
+	$(LDFLAGS) -o $@
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -189,7 +192,12 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-cgol_SOURCES = src/main.cpp src/CGOL.cpp
+cgol_SOURCES = src/main.cpp \
+	       src/IWidgetFactory.cpp \
+	       src/IWindow.cpp \
+	       src/Program.cpp
+
+cgol_CXXFLAGS = $(AM_CXXFLAGS) -std=c++11
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -286,7 +294,7 @@ clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 cgol$(EXEEXT): $(cgol_OBJECTS) $(cgol_DEPENDENCIES) $(EXTRA_cgol_DEPENDENCIES) 
 	@rm -f cgol$(EXEEXT)
-	$(CXXLINK) $(cgol_OBJECTS) $(cgol_LDADD) $(LIBS)
+	$(cgol_LINK) $(cgol_OBJECTS) $(cgol_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -294,8 +302,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/CGOL.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-IWidgetFactory.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-IWindow.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-Program.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-main.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -311,33 +321,61 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-main.o: src/main.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.o -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='main.o' libtool=no @AMDEPBACKSLASH@
+cgol-main.o: src/main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-main.o -MD -MP -MF $(DEPDIR)/cgol-main.Tpo -c -o cgol-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-main.Tpo $(DEPDIR)/cgol-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='cgol-main.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-main.o `test -f 'src/main.cpp' || echo '$(srcdir)/'`src/main.cpp
 
-main.obj: src/main.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT main.obj -MD -MP -MF $(DEPDIR)/main.Tpo -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/main.Tpo $(DEPDIR)/main.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='main.obj' libtool=no @AMDEPBACKSLASH@
+cgol-main.obj: src/main.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-main.obj -MD -MP -MF $(DEPDIR)/cgol-main.Tpo -c -o cgol-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-main.Tpo $(DEPDIR)/cgol-main.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='cgol-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
 
-CGOL.o: src/CGOL.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CGOL.o -MD -MP -MF $(DEPDIR)/CGOL.Tpo -c -o CGOL.o `test -f 'src/CGOL.cpp' || echo '$(srcdir)/'`src/CGOL.cpp
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/CGOL.Tpo $(DEPDIR)/CGOL.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/CGOL.cpp' object='CGOL.o' libtool=no @AMDEPBACKSLASH@
+cgol-IWidgetFactory.o: src/IWidgetFactory.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IWidgetFactory.o -MD -MP -MF $(DEPDIR)/cgol-IWidgetFactory.Tpo -c -o cgol-IWidgetFactory.o `test -f 'src/IWidgetFactory.cpp' || echo '$(srcdir)/'`src/IWidgetFactory.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IWidgetFactory.Tpo $(DEPDIR)/cgol-IWidgetFactory.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IWidgetFactory.cpp' object='cgol-IWidgetFactory.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CGOL.o `test -f 'src/CGOL.cpp' || echo '$(srcdir)/'`src/CGOL.cpp
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IWidgetFactory.o `test -f 'src/IWidgetFactory.cpp' || echo '$(srcdir)/'`src/IWidgetFactory.cpp
 
-CGOL.obj: src/CGOL.cpp
-@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT CGOL.obj -MD -MP -MF $(DEPDIR)/CGOL.Tpo -c -o CGOL.obj `if test -f 'src/CGOL.cpp'; then $(CYGPATH_W) 'src/CGOL.cpp'; else $(CYGPATH_W) '$(srcdir)/src/CGOL.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/CGOL.Tpo $(DEPDIR)/CGOL.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/CGOL.cpp' object='CGOL.obj' libtool=no @AMDEPBACKSLASH@
+cgol-IWidgetFactory.obj: src/IWidgetFactory.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IWidgetFactory.obj -MD -MP -MF $(DEPDIR)/cgol-IWidgetFactory.Tpo -c -o cgol-IWidgetFactory.obj `if test -f 'src/IWidgetFactory.cpp'; then $(CYGPATH_W) 'src/IWidgetFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IWidgetFactory.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IWidgetFactory.Tpo $(DEPDIR)/cgol-IWidgetFactory.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IWidgetFactory.cpp' object='cgol-IWidgetFactory.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o CGOL.obj `if test -f 'src/CGOL.cpp'; then $(CYGPATH_W) 'src/CGOL.cpp'; else $(CYGPATH_W) '$(srcdir)/src/CGOL.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IWidgetFactory.obj `if test -f 'src/IWidgetFactory.cpp'; then $(CYGPATH_W) 'src/IWidgetFactory.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IWidgetFactory.cpp'; fi`
+
+cgol-IWindow.o: src/IWindow.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IWindow.o -MD -MP -MF $(DEPDIR)/cgol-IWindow.Tpo -c -o cgol-IWindow.o `test -f 'src/IWindow.cpp' || echo '$(srcdir)/'`src/IWindow.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IWindow.Tpo $(DEPDIR)/cgol-IWindow.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IWindow.cpp' object='cgol-IWindow.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IWindow.o `test -f 'src/IWindow.cpp' || echo '$(srcdir)/'`src/IWindow.cpp
+
+cgol-IWindow.obj: src/IWindow.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IWindow.obj -MD -MP -MF $(DEPDIR)/cgol-IWindow.Tpo -c -o cgol-IWindow.obj `if test -f 'src/IWindow.cpp'; then $(CYGPATH_W) 'src/IWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IWindow.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IWindow.Tpo $(DEPDIR)/cgol-IWindow.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IWindow.cpp' object='cgol-IWindow.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IWindow.obj `if test -f 'src/IWindow.cpp'; then $(CYGPATH_W) 'src/IWindow.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IWindow.cpp'; fi`
+
+cgol-Program.o: src/Program.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-Program.o -MD -MP -MF $(DEPDIR)/cgol-Program.Tpo -c -o cgol-Program.o `test -f 'src/Program.cpp' || echo '$(srcdir)/'`src/Program.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-Program.Tpo $(DEPDIR)/cgol-Program.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Program.cpp' object='cgol-Program.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-Program.o `test -f 'src/Program.cpp' || echo '$(srcdir)/'`src/Program.cpp
+
+cgol-Program.obj: src/Program.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-Program.obj -MD -MP -MF $(DEPDIR)/cgol-Program.Tpo -c -o cgol-Program.obj `if test -f 'src/Program.cpp'; then $(CYGPATH_W) 'src/Program.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Program.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-Program.Tpo $(DEPDIR)/cgol-Program.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/Program.cpp' object='cgol-Program.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-Program.obj `if test -f 'src/Program.cpp'; then $(CYGPATH_W) 'src/Program.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Program.cpp'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \

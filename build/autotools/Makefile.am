@@ -1,3 +1,9 @@
 ## Process this file with automake to produce Makefile.in
 bin_PROGRAMS = cgol
-cgol_SOURCES = src/main.cpp src/CGOL.cpp
+cgol_SOURCES = src/main.cpp \
+	       src/IWidgetFactory.cpp \
+	       src/IWindow.cpp \
+	       src/Program.cpp
+
+cgol_CXXFLAGS = $(AM_CXXFLAGS) -std=c++11
+

@@ -1,19 +1,15 @@
 
 #include <config.h>
-#include <cstdio>
-#include "CGOL.h"
+#include "Program.h"
 
-int main ( int argc, char** argv ) {
-    int exit_code;
-    cgol::CGOL* cgol;
+int main ( int argc, char ** argv ) {
+    int exit_code = 0;
 
-    // TODO: Exception handling on CGOL instantiation.
-    cgol = new cgol::CGOL();
-    exit_code = cgol->Run( argc, argv );
+    //TODO: Add exception handling.
 
-    delete cgol;
-
-    puts("\nThank you for running package " PACKAGE ".");
+    cgol::Program program;
+    exit_code = program.Main( argc, argv );
 
     return exit_code;
 }
+
