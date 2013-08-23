@@ -8,7 +8,7 @@ namespace cgol {
 
 class cgol::ITextField {
     public:
-        virtual     ~ITextField     () {};
+        virtual     ~ITextField     ();
 };
 
 #endif

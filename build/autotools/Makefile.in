@@ -66,8 +66,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_cgol_OBJECTS = cgol-main.$(OBJEXT) cgol-IWidgetFactory.$(OBJEXT) \
-	cgol-IWindow.$(OBJEXT) cgol-Program.$(OBJEXT)
+am_cgol_OBJECTS = cgol-main.$(OBJEXT) cgol-IButton.$(OBJEXT) \
+	cgol-ILabel.$(OBJEXT) cgol-ITextField.$(OBJEXT) \
+	cgol-IWidgetFactory.$(OBJEXT) cgol-IWindow.$(OBJEXT) \
+	cgol-Program.$(OBJEXT)
 cgol_OBJECTS = $(am_cgol_OBJECTS)
 cgol_LDADD = $(LDADD)
 cgol_LINK = $(CXXLD) $(cgol_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
@@ -193,6 +195,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 cgol_SOURCES = src/main.cpp \
+	       src/IButton.cpp \
+	       src/ILabel.cpp \
+	       src/ITextField.cpp \
 	       src/IWidgetFactory.cpp \
 	       src/IWindow.cpp \
 	       src/Program.cpp
@@ -302,6 +307,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-IButton.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-ILabel.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-ITextField.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-IWidgetFactory.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-IWindow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cgol-Program.Po@am__quote@
@@ -334,6 +342,48 @@ cgol-main.obj: src/main.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/main.cpp' object='cgol-main.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-main.obj `if test -f 'src/main.cpp'; then $(CYGPATH_W) 'src/main.cpp'; else $(CYGPATH_W) '$(srcdir)/src/main.cpp'; fi`
+
+cgol-IButton.o: src/IButton.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IButton.o -MD -MP -MF $(DEPDIR)/cgol-IButton.Tpo -c -o cgol-IButton.o `test -f 'src/IButton.cpp' || echo '$(srcdir)/'`src/IButton.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IButton.Tpo $(DEPDIR)/cgol-IButton.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IButton.cpp' object='cgol-IButton.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IButton.o `test -f 'src/IButton.cpp' || echo '$(srcdir)/'`src/IButton.cpp
+
+cgol-IButton.obj: src/IButton.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IButton.obj -MD -MP -MF $(DEPDIR)/cgol-IButton.Tpo -c -o cgol-IButton.obj `if test -f 'src/IButton.cpp'; then $(CYGPATH_W) 'src/IButton.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IButton.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-IButton.Tpo $(DEPDIR)/cgol-IButton.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/IButton.cpp' object='cgol-IButton.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-IButton.obj `if test -f 'src/IButton.cpp'; then $(CYGPATH_W) 'src/IButton.cpp'; else $(CYGPATH_W) '$(srcdir)/src/IButton.cpp'; fi`
+
+cgol-ILabel.o: src/ILabel.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-ILabel.o -MD -MP -MF $(DEPDIR)/cgol-ILabel.Tpo -c -o cgol-ILabel.o `test -f 'src/ILabel.cpp' || echo '$(srcdir)/'`src/ILabel.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-ILabel.Tpo $(DEPDIR)/cgol-ILabel.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ILabel.cpp' object='cgol-ILabel.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-ILabel.o `test -f 'src/ILabel.cpp' || echo '$(srcdir)/'`src/ILabel.cpp
+
+cgol-ILabel.obj: src/ILabel.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-ILabel.obj -MD -MP -MF $(DEPDIR)/cgol-ILabel.Tpo -c -o cgol-ILabel.obj `if test -f 'src/ILabel.cpp'; then $(CYGPATH_W) 'src/ILabel.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ILabel.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-ILabel.Tpo $(DEPDIR)/cgol-ILabel.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ILabel.cpp' object='cgol-ILabel.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-ILabel.obj `if test -f 'src/ILabel.cpp'; then $(CYGPATH_W) 'src/ILabel.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ILabel.cpp'; fi`
+
+cgol-ITextField.o: src/ITextField.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-ITextField.o -MD -MP -MF $(DEPDIR)/cgol-ITextField.Tpo -c -o cgol-ITextField.o `test -f 'src/ITextField.cpp' || echo '$(srcdir)/'`src/ITextField.cpp
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-ITextField.Tpo $(DEPDIR)/cgol-ITextField.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ITextField.cpp' object='cgol-ITextField.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-ITextField.o `test -f 'src/ITextField.cpp' || echo '$(srcdir)/'`src/ITextField.cpp
+
+cgol-ITextField.obj: src/ITextField.cpp
+@am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-ITextField.obj -MD -MP -MF $(DEPDIR)/cgol-ITextField.Tpo -c -o cgol-ITextField.obj `if test -f 'src/ITextField.cpp'; then $(CYGPATH_W) 'src/ITextField.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ITextField.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(am__mv) $(DEPDIR)/cgol-ITextField.Tpo $(DEPDIR)/cgol-ITextField.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	source='src/ITextField.cpp' object='cgol-ITextField.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -c -o cgol-ITextField.obj `if test -f 'src/ITextField.cpp'; then $(CYGPATH_W) 'src/ITextField.cpp'; else $(CYGPATH_W) '$(srcdir)/src/ITextField.cpp'; fi`
 
 cgol-IWidgetFactory.o: src/IWidgetFactory.cpp
 @am__fastdepCXX_TRUE@	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(cgol_CXXFLAGS) $(CXXFLAGS) -MT cgol-IWidgetFactory.o -MD -MP -MF $(DEPDIR)/cgol-IWidgetFactory.Tpo -c -o cgol-IWidgetFactory.o `test -f 'src/IWidgetFactory.cpp' || echo '$(srcdir)/'`src/IWidgetFactory.cpp

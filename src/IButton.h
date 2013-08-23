@@ -8,7 +8,7 @@ namespace cgol {
 
 class cgol::IButton {
     public:
-        virtual     ~IButton    () {};
+        virtual     ~IButton    ();
 };
 
 #endif

@@ -8,7 +8,7 @@ namespace cgol {
 
 class cgol::ILabel {
     public:
-        virtual     ~ILabel     () {};
+        virtual     ~ILabel     ();
 };
 
 #endif
